@@ -1,0 +1,46 @@
+import sys
+import urllib.request
+imort tarfile 
+import zipfile
+import os
+
+def download(url, filename, download_dir, lcl_dir_url, lcl_dir_filename):
+
+  save_path=os.path.join(download_dir, filename)
+  if not os.path.join(save_path):
+    if not os.path.exists(download_dir):
+      os makedirs(download_dir)
+
+    print("Downloding", filename, "...")
+
+    url=url+ filename
+    file_path,_=urllib.urlretrieve(
+        url= url, filename=save_path, reporthook= printdownload_progress)
+    print("Done!")
+
+    retend_back= urllib.request.pathname2url("")
+    url=lcl_dir_url+ lcl_dir_filename
+    file_path,_=urllib.urlretrieve(
+        url= url, filename=save_path, reporthook= printdownload_progress)
+    print("Done!")
+  
+  
+def extract(url, download_dir):
+  filename=url.split('/')[-1]
+  file_path=os.path.join(download_dir, filename)
+  if not os.path.exists(download_dir):
+     os makedirs(download_dir)
+   file_path,_=urllib.urlretrieve(
+     url= url, filename=save_path, reporthook= printdownload_progress
+     )
+   print("Download finished.Extracting files.")
+          #fetch the zip file
+    if file_path.endswith(".zip"):
+      zipfile.zipfile(file=file_path, mode="r"). extractall(download_dir)
+          #fetch the tar-ball
+    elif file_path.endswith(".tar.gz", ".tgz"):
+      tarfile.open(file=file_path, mode="r"). extractall(download_dir)
+      
+    print("Done!")
+  else:
+   print("Data has apparently already been downloaded and unpacked.")
